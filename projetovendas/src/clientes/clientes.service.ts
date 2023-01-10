@@ -34,6 +34,7 @@ export class ClientesService {
 
   create(createClienteDto: any) {
     this.clientes.push(createClienteDto);
+    return createClienteDto;
   }
 
   update(id: string, updateClienteDto: any) {
