@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Vendedor } from './vendedor.entity';
 
 @Entity('Clientes')
 export class Cliente {
@@ -14,8 +21,11 @@ export class Cliente {
   @Column()
   contato: string;
 
-  @Column('json', { nullable: true })
-  vendedor: string[];
+  @JoinTable()
+  @ManyToMany(() => Vendedor, (vendedor: Vendedor) => vendedor.clientes, {
+    cascade: true,
+  })
+  vendedor: Vendedor[];
 
   @Column('json', { nullable: true })
   produto: string[];
